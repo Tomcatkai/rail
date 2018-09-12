@@ -2,9 +2,11 @@ package com.zr.rail.dao;
 
 import com.zr.rail.entity.Speed;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface SpeedDao {
     /**
      * 使用所属的成绩id查询speedList

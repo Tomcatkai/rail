@@ -25,7 +25,7 @@ public class Speed {
     /**
      * 本次观速对应成绩id
      */
-    private Integer speedScoreId;
+    private Long speedScoreId;
 
     public Long getSpeedId() {
         return speedId;
@@ -59,15 +59,15 @@ public class Speed {
         this.speedScore = speedScore;
     }
 
-    public Integer getSpeedScoreId() {
+    public Long getSpeedScoreId() {
         return speedScoreId;
     }
 
-    public void setSpeedScoreId(Integer speedScoreId) {
+    public void setSpeedScoreId(Long speedScoreId) {
         this.speedScoreId = speedScoreId;
     }
 
-    public Speed(Long speedId, Integer speedReal, Integer speedView, Integer speedScore, Integer speedScoreId) {
+    public Speed(Long speedId, Integer speedReal, Integer speedView, Integer speedScore, Long speedScoreId) {
         this.speedId = speedId;
         this.speedReal = speedReal;
         this.speedView = speedView;
