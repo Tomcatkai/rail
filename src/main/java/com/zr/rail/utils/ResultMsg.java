@@ -13,6 +13,7 @@ public enum ResultMsg {
     PARAM_IS_BLANK("参数为空"),
     PARAM_TYPE_BIND_ERROR("参数类型错误"),
     PARAM_NOT_COMPLETE("参数缺失"),
+    PARAM_INSIDE_WRONG("接口内部参数错误"),
 
     /* 用户错误 */
     USER_NOT_LOGGED_IN("用户未登录"),
