@@ -20,12 +20,12 @@ import java.util.*;
  * @create: 2018-09-10 13:34
  **/
 @RestController
-public class HelloWorldController {
+public class ScoreController {
     private final StudentDao studentDao;
     private final ScoreService scoreService;
 
     @Autowired
-    public HelloWorldController(StudentDao studentDao, ScoreService scoreService) {
+    public ScoreController(StudentDao studentDao, ScoreService scoreService) {
         this.studentDao = studentDao;
         this.scoreService = scoreService;
     }
