@@ -20,10 +20,8 @@ public class TestJwtUtil {
         user.setUserId(10001L);
         user.setRoleId(1L);
         String subject = JwtUtil.generalSubject(user);
-        String token = jwt.createJWT(Constants.JWT_ID, subject, Constants.JWT_TTL);
-        String refreshToken = jwt.createJWT(Constants.JWT_ID, subject, Constants.JWT_REFRESH_TTL);
+        String token = jwt.createJWT(Constants.JWT_ID, subject, Constants.JWT_REFRESH_TTL);
         System.out.println(token);
-        System.out.println(refreshToken);
     }
 
     @Test
