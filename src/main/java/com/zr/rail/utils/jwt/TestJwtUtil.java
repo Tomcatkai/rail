@@ -1,5 +1,6 @@
 package com.zr.rail.utils.jwt;
 
+import com.zr.rail.utils.Constants;
 import io.jsonwebtoken.Claims;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +20,8 @@ public class TestJwtUtil {
         user.setUserId(10001L);
         user.setRoleId(1L);
         String subject = JwtUtil.generalSubject(user);
-        String token = jwt.createJWT(Constant.JWT_ID, subject, Constant.JWT_TTL);
-        String refreshToken = jwt.createJWT(Constant.JWT_ID, subject, Constant.JWT_REFRESH_TTL);
+        String token = jwt.createJWT(Constants.JWT_ID, subject, Constants.JWT_TTL);
+        String refreshToken = jwt.createJWT(Constants.JWT_ID, subject, Constants.JWT_REFRESH_TTL);
         System.out.println(token);
         System.out.println(refreshToken);
     }

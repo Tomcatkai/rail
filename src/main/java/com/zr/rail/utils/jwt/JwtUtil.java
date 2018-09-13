@@ -1,6 +1,7 @@
 package com.zr.rail.utils.jwt;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zr.rail.utils.Constants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -24,7 +25,7 @@ public class JwtUtil {
      * @return
      */
     public SecretKey generalKey(){
-        String stringKey = Constant.JWT_SECRET;//本地配置文件中加密的密文7786df7fc3a34e26a61c034d5ec8245d
+        String stringKey = Constants.JWT_SECRET;//本地配置文件中加密的密文7786df7fc3a34e26a61c034d5ec8245d
         byte[] encodedKey = Base64.decodeBase64(stringKey);//本地的密码解码[B@152f6e2
         System.out.println(encodedKey);//[B@152f6e2
         System.out.println(Base64.encodeBase64URLSafeString(encodedKey));//7786df7fc3a34e26a61c034d5ec8245d

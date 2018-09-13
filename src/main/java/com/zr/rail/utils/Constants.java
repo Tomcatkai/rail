@@ -1,11 +1,11 @@
-package com.zr.rail.utils.jwt;
+package com.zr.rail.utils;
 
 /**
  * @description: jwt常量
  * @author: KaiZhang
  * @create: 2018-09-13 11:24
  **/
-public class Constant {
+public class Constants {
 
     /**
      * 数据请求返回码
