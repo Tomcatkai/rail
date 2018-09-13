@@ -14,7 +14,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.util.Date;
 
 /**
- * @description: 工具类
+ * @description: Jwt工具类
  * @author: KaiZhang
  * @create: 2018-09-13 11:28
  **/
