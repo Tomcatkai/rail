@@ -43,7 +43,6 @@ public class ScoreService {
      * @param jsonObject 前台传入的Json对象
      * @return 处理结果
      */
-    @Transactional(rollbackFor = Exception.class)
     public Map getScore(JSONObject jsonObject){
         //暂时没有userId,先写个1
         Long userId = 1L;
