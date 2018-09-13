@@ -43,9 +43,8 @@ public class ScoreService {
      * @param jsonObject 前台传入的Json对象
      * @return 处理结果
      */
-    public Map getScore(JSONObject jsonObject){
+    public Map getScore(JSONObject jsonObject,Long stuId){
         //暂时没有userId,先写个1
-        Long userId = 1L;
         //初始化结果
         HashMap<String, Integer> result = new HashMap<>(5);
         //初始化观距,观速列表
@@ -66,7 +65,7 @@ public class ScoreService {
         int speedTotal = (int) speedScore.get("total");
         ArrayList speedScoreList = (ArrayList) speedScore.get("scoreList");
         //存储成绩信息
-        storeScore(distanceTotal,speedTotal,userId,distanceList,speedList,distanceScoreList,speedScoreList);
+        storeScore(distanceTotal,speedTotal, stuId,distanceList,speedList,distanceScoreList,speedScoreList);
         //构建返回结果
         result.put("distanceTotal",distanceTotal);
         result.put("speedTotal",speedTotal);
