@@ -76,6 +76,18 @@
 			<!--<artifactId>resteasy-spring-boot-starter</artifactId>-->
 			<!--<version>2.3.4-RELEASE</version>-->
 		<!--</dependency>-->
+		<!--集成jwt-->
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+		</dependency>
+
 
 	</dependencies>
 
