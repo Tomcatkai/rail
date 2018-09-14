@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.zr.rail.entity.Student;
 import com.zr.rail.dao.StudentDao;
 import com.zr.rail.service.ScoreService;
-import com.zr.rail.utils.Constants;
 import com.zr.rail.utils.ResultMsg;
 import com.zr.rail.utils.ResultUtils;
 import com.zr.rail.utils.jwt.JwtUtil;
@@ -14,12 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
- * @description: 测试Controller
+ * @description: ScoreController
  * @author: KaiZhang
  * @create: 2018-09-10 13:34
  **/
@@ -79,31 +77,7 @@ public class ScoreController {
     public Map login(@RequestParam(value = "stuNo") String stuNo,
                      @RequestParam(value = "passWord") String passWord,
                      HttpServletResponse response){
-        Student student = studentDao.getOneFromSno(stuNo);
-        if (student==null){
-            return ResultUtils.error(ResultMsg.USER_NOT_EXIST.msg());
-        }
-        String pass = student.getStuPass();
-        if(pass.isEmpty()){
-            return ResultUtils.error(ResultMsg.USER_PASS_BLANK.msg());
-        }
-        if(pass.equals(passWord)){
-            //登录成功,将token设置到cookie中
-            JwtUtil jwt = new JwtUtil();
-            String subject = JwtUtil.generalSubject(student);
-            String token = null;
-            try {
-                token = jwt.createJWT(Constants.JWT_ID,subject,Constants.JWT_REFRESH_TTL);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return ResultUtils.error("创建token失败");
-            }
-            Cookie cookie = new Cookie("token",token);
-            cookie.setPath("/");
-            response.addCookie(cookie);
-            return ResultUtils.success(ResultMsg.SUCCESS.msg());
-        }
-        return ResultUtils.error(ResultMsg.USER_PASS_WRONG.msg());
+        return scoreService.stuLogin(stuNo,passWord,response);
     }
 
     /**
