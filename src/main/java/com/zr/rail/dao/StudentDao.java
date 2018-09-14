@@ -63,6 +63,7 @@ public interface StudentDao {
      * @param student 学生对象
      */
     @Insert("INSERT INTO tbl_student(stu_name,stu_pass,stu_no,stu_sex) VALUES(#{stuName}, #{stuPass}, #{stuNo}, #{stuSex})")
+    @Options(useGeneratedKeys = true, keyProperty = "stuId", keyColumn="stu_id")
     void insert(Student student);
 
     /**

@@ -7,6 +7,8 @@ package com.zr.rail.utils;
 public enum ResultMsg {
     /* 成功状态码 */
     SUCCESS("成功"),
+    /* 成功状态码 */
+    FAILED("失败"),
 
     /* 参数错误 */
     PARAM_IS_INVALID("参数无效"),
@@ -24,6 +26,7 @@ public enum ResultMsg {
     USER_PASS_MSG_NOT_COMPLETE("用户密码信息缺失"),
     USER_PASS_BLANK("密码为空"),
     USER_PASS_WRONG("密码错误"),
+    STU_NO_BLANK("学号为空"),
 
     /* 业务错误 */
     SPECIFIED_QUESTIONED_USER_NOT_EXIST("某业务出现问题"),

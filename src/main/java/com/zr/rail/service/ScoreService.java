@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.zr.rail.dao.DistanceDao;
 import com.zr.rail.dao.ScoreDao;
 import com.zr.rail.dao.SpeedDao;
+import com.zr.rail.dao.StudentDao;
 import com.zr.rail.entity.Distance;
 import com.zr.rail.entity.Score;
 import com.zr.rail.entity.Speed;
+import com.zr.rail.entity.Student;
 import com.zr.rail.utils.ResultMsg;
 import com.zr.rail.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +32,28 @@ public class ScoreService {
     private final ScoreDao scoreDao;
     private final SpeedDao speedDao;
     private final DistanceDao distanceDao;
+    private final StudentDao studentDao;
 
     @Autowired
-    public ScoreService(ScoreDao scoreDao, SpeedDao speedDao, DistanceDao distanceDao) {
+    public ScoreService(ScoreDao scoreDao, SpeedDao speedDao, DistanceDao distanceDao, StudentDao studentDao) {
         this.scoreDao = scoreDao;
         this.speedDao = speedDao;
         this.distanceDao = distanceDao;
+        this.studentDao = studentDao;
+    }
+
+
+    /**
+     * 学生注册方法
+     * @param student 学生
+     * @return 成功;失败
+     */
+    public Map stuRegister(Student student){
+        studentDao.insert(student);
+       if(student.getStuId()!=null){
+           return ResultUtils.success(ResultMsg.SUCCESS.msg());
+       }
+       return ResultUtils.error(ResultMsg.FAILED.msg());
     }
 
     /**

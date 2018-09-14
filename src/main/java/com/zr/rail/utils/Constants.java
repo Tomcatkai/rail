@@ -16,7 +16,7 @@ public class Constants {
      */
     public static final String JWT_SECRET = "7786df7fc3a34e26a61c034d5ec8245d";
     /**
-     * millisecond
+     * millisecond   12小时
      */
     public static final int JWT_REFRESH_TTL = 12 * 60 * 60 * 1000; // 12*60*60*1000;
 
