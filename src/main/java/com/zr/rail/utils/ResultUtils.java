@@ -3,6 +3,9 @@ package com.zr.rail.utils;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author kaiZhang
+ */
 public class ResultUtils {
 
     private static int SUCCESS = 0;

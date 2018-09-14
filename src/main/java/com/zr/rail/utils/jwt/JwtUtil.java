@@ -24,11 +24,16 @@ public class JwtUtil {
      * @return
      */
     public SecretKey generalKey(){
-        String stringKey = Constants.JWT_SECRET;//本地配置文件中加密的密文7786df7fc3a34e26a61c034d5ec8245d
-        byte[] encodedKey = Base64.decodeBase64(stringKey);//本地的密码解码[B@152f6e2
-        System.out.println(encodedKey);//[B@152f6e2
-        System.out.println(Base64.encodeBase64URLSafeString(encodedKey));//7786df7fc3a34e26a61c034d5ec8245d
-        SecretKey key = new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");// 根据给定的字节数组使用AES加密算法构造一个密钥，使用 encodedKey中的始于且包含 0 到前 leng 个字节这是当然是所有。
+        //本地配置文件中加密的密文7786df7fc3a34e26a61c034d5ec8245d
+        String stringKey = Constants.JWT_SECRET;
+        //本地的密码解码[B@152f6e2
+        byte[] encodedKey = Base64.decodeBase64(stringKey);
+        //[B@152f6e2
+        System.out.println(encodedKey);
+        //7786df7fc3a34e26a61c034d5ec8245d
+        System.out.println(Base64.encodeBase64URLSafeString(encodedKey));
+        // 根据给定的字节数组使用AES加密算法构造一个密钥，使用 encodedKey中的始于且包含 0 到前 leng 个字节这是当然是所有。
+        SecretKey key = new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
         return key;
     }
 
@@ -76,10 +81,14 @@ public class JwtUtil {
      * @throws Exception
      */
     public Claims parseJWT(String jwt) throws Exception{
-        SecretKey key = generalKey();  //签名秘钥，和生成的签名的秘钥一模一样
-        Claims claims = Jwts.parser()  //得到DefaultJwtParser
-                .setSigningKey(key)         //设置签名的秘钥
-                .parseClaimsJws(jwt).getBody();//设置需要解析的jwt
+        //签名秘钥，和生成的签名的秘钥一模一样
+        SecretKey key = generalKey();
+        //得到DefaultJwtParser
+        Claims claims = Jwts.parser()
+                //设置签名的秘钥
+                .setSigningKey(key)
+                //设置需要解析的jwt
+                .parseClaimsJws(jwt).getBody();
         return claims;
     }
 

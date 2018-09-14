@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @description: 观距Dao
+ * @author: KaiZhang
+ **/
 @Repository
 public interface DistanceDao {
     /**

@@ -4,6 +4,9 @@ import com.zr.rail.entity.Score;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author kaiZhang
+ */
 @Repository
 public interface ScoreDao {
 

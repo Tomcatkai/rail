@@ -9,6 +9,7 @@ import com.zr.rail.entity.Distance;
 import com.zr.rail.entity.Score;
 import com.zr.rail.entity.Speed;
 import com.zr.rail.entity.Student;
+import com.zr.rail.utils.Constants;
 import com.zr.rail.utils.ResultMsg;
 import com.zr.rail.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,14 +71,14 @@ public class ScoreService {
         ArrayList speedList = (ArrayList) jsonObject.get("speed");
         //计算观距成绩
         HashMap distanceScore = (HashMap) calculateScore(distanceList,"distance");
-        if("failed".equals(distanceScore.get("flag"))){
+        if(Constants.FAILED.equals(distanceScore.get(Constants.FLAG))){
             return ResultUtils.error((String) distanceScore.get("msg"));
         }
         int distanceTotal = (int) distanceScore.get("total");
         ArrayList distanceScoreList = (ArrayList) distanceScore.get("scoreList");
         //计算观速成绩
         HashMap speedScore = (HashMap) calculateScore(speedList,"speed");
-        if("failed".equals(speedScore.get("flag"))){
+        if(Constants.FAILED.equals(speedScore.get(Constants.FLAG))){
             return ResultUtils.error((String) speedScore.get("msg"));
         }
         int speedTotal = (int) speedScore.get("total");
@@ -116,19 +117,19 @@ public class ScoreService {
                 view = (Integer) map.get("viewDistance");
                 real = (Integer) map.get("realDistance");
             }else {
-                result.put("flag","failed");
+                result.put(Constants.FLAG, Constants.FAILED);
                 result.put("msg",ResultMsg.PARAM_INSIDE_WRONG.msg());
                 return result;
             }
             //观测,实际空校验
             if(view==null||real==null){
-                result.put("flag","failed");
+                result.put(Constants.FLAG,Constants.FAILED);
                 result.put("msg",ResultMsg.PARAM_IS_BLANK.msg());
                 return result;
             }
             //实际0校验
             if(real==0){
-                result.put("flag","failed");
+                result.put(Constants.FLAG,Constants.FAILED);
                 result.put("msg",ResultMsg.PARAM_IS_INVALID.msg());
                 return result;
             }
@@ -152,7 +153,7 @@ public class ScoreService {
             }
             scoreList.add(score);
         }
-        result.put("flag","suc");
+        result.put(Constants.FLAG,Constants.SUCCESS);
         result.put("total",total);
         result.put("scoreList",scoreList);
         return result;
