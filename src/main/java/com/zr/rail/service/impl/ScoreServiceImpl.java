@@ -55,6 +55,9 @@ public class ScoreServiceImpl implements ScoreService {
      */
     @Override
     public Map stuRegister(Student student){
+        if(studentDao.getOneFromSno(student.getStuNo())!=null){
+            return ResultUtils.error(ResultMsg.USER_HAS_EXISTED.msg());
+        }
         studentDao.insert(student);
        if(student.getStuId()!=null){
            return ResultUtils.success(ResultMsg.SUCCESS.msg());
