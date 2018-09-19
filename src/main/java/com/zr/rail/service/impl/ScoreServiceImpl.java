@@ -72,7 +72,6 @@ public class ScoreServiceImpl implements ScoreService {
      */
     @Override
     public Map getScore(JSONObject jsonObject, Long stuId){
-        //暂时没有userId,先写个1
         //初始化结果
         HashMap<String, Integer> result = new HashMap<>(5);
         //初始化观距,观速列表
@@ -110,6 +109,7 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public Map stuLogin(String stuNo, String passWord, HttpServletResponse response){
         Student student = studentDao.getOneFromSno(stuNo);
+        HashMap result = new HashMap(3);
         if (student==null){
             return ResultUtils.error(ResultMsg.USER_NOT_EXIST.msg());
         }
@@ -128,10 +128,11 @@ public class ScoreServiceImpl implements ScoreService {
                 e.printStackTrace();
                 return ResultUtils.error("创建token失败");
             }
-            Cookie cookie = new Cookie("token",token);
-            cookie.setPath("/");
-            response.addCookie(cookie);
-            return ResultUtils.success(ResultMsg.SUCCESS.msg());
+//            Cookie cookie = new Cookie("token",token);
+//            cookie.setPath("/");
+//            response.addCookie(cookie);
+            result.put("token",token);
+            return ResultUtils.success(result);
         }
         return ResultUtils.error(ResultMsg.USER_PASS_WRONG.msg());
     }
@@ -156,22 +157,22 @@ public class ScoreServiceImpl implements ScoreService {
             Integer view;
             Integer real;
             if("speed".equals(type)){
-                view = (Integer) map.get("viewSpeed");
-                real = (Integer) map.get("realSpeed");
+                view = Integer.parseInt((String) map.get("viewSpeed"));
+                real = Integer.parseInt((String) map.get("realSpeed"));
             }else if("distance".equals(type)){
-                view = (Integer) map.get("viewDistance");
-                real = (Integer) map.get("realDistance");
+                view = Integer.parseInt((String) map.get("viewDistance"));
+                real = Integer.parseInt((String) map.get("realDistance"));
             }else {
                 result.put(Constants.FLAG, Constants.FAILED);
                 result.put("msg",ResultMsg.PARAM_INSIDE_WRONG.msg());
                 return result;
             }
-            //观测,实际空校验
-            if(view==null||real==null){
-                result.put(Constants.FLAG,Constants.FAILED);
-                result.put("msg",ResultMsg.PARAM_IS_BLANK.msg());
-                return result;
-            }
+///            //观测,实际空校验
+//            if(view==null||real==null){
+//                result.put(Constants.FLAG,Constants.FAILED);
+//                result.put("msg",ResultMsg.PARAM_IS_BLANK.msg());
+//                return result;
+//            }
             //实际0校验
             if(real==0){
                 result.put(Constants.FLAG,Constants.FAILED);
@@ -226,8 +227,8 @@ public class ScoreServiceImpl implements ScoreService {
         scoreDao.insert(score);
         for(Object distanceObj :distanceList){
             LinkedHashMap map = (LinkedHashMap) distanceObj;
-            Integer viewDistance = (Integer) map.get("viewDistance");
-            Integer realDistance = (Integer) map.get("realDistance");
+            Integer viewDistance = Integer.parseInt((String) map.get("viewDistance"));
+            Integer realDistance = Integer.parseInt((String) map.get("realDistance"));
             Distance distance = new Distance();
             distance.setDistanceView(viewDistance);
             distance.setDistanceReal(realDistance);
@@ -238,8 +239,8 @@ public class ScoreServiceImpl implements ScoreService {
         }
         for(Object speedObj :speedList){
             LinkedHashMap map = (LinkedHashMap) speedObj;
-            Integer viewSpeed = (Integer) map.get("viewSpeed");
-            Integer realSpeed = (Integer) map.get("realSpeed");
+            Integer viewSpeed = Integer.parseInt((String) map.get("viewSpeed"));
+            Integer realSpeed = Integer.parseInt((String) map.get("realSpeed"));
             Speed speed = new Speed();
             speed.setSpeedView(viewSpeed);
             speed.setSpeedReal(realSpeed);

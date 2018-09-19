@@ -85,8 +85,20 @@ public class ScoreController {
      * @param jsonObject 各项参数
      * @return 得分结果
      */
-    @RequestMapping(value = "/score",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
-    public Map getScore(@RequestBody JSONObject jsonObject,@CookieValue("token") String token){
+    @RequestMapping(value = "/score",method = RequestMethod.POST)
+    public Map getScore(@RequestBody JSONObject jsonObject){
+        if(jsonObject.get("token")==null){
+            return ResultUtils.error("token为空");
+        }
+        ArrayList list = (ArrayList) jsonObject.get("token");
+        HashMap hashMap = (HashMap) list.get(0);
+        if(hashMap==null){
+            return ResultUtils.error("token为空");
+        }
+        String token = (String) hashMap.get("token");
+        if(token.isEmpty()){
+            return ResultUtils.error("token为空");
+        }
         JwtUtil jwt = new JwtUtil();
         try {
             Claims claims = jwt.parseJWT(token);
