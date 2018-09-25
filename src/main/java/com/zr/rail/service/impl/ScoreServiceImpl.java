@@ -103,11 +103,10 @@ public class ScoreServiceImpl implements ScoreService {
      * 学生登录
      * @param stuNo 学号
      * @param passWord 密码
-     * @param response 响应
      * @return 结果
      */
     @Override
-    public Map stuLogin(String stuNo, String passWord, HttpServletResponse response){
+    public Map stuLogin(String stuNo, String passWord){
         Student student = studentDao.getOneFromSno(stuNo);
         HashMap result = new HashMap(3);
         if (student==null){

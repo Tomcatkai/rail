@@ -24,7 +24,6 @@ public interface StudentDao {
             @Result(property = "stuName", column = "stu_name"),
             @Result(property = "stuPass", column = "stu_pass"),
             @Result(property = "stuNo",   column = "stu_no"),
-            @Result(property = "stuSex",  column = "stu_sex")
     })
     List<Student> getAll();
 
@@ -39,7 +38,6 @@ public interface StudentDao {
             @Result(property = "stuName", column = "stu_name"),
             @Result(property = "stuPass", column = "stu_pass"),
             @Result(property = "stuNo",   column = "stu_no"),
-            @Result(property = "stuSex",  column = "stu_sex")
     })
     Student getOneFromId(Long stuId);
 
@@ -54,7 +52,6 @@ public interface StudentDao {
             @Result(property = "stuName", column = "stu_name"),
             @Result(property = "stuPass", column = "stu_pass"),
             @Result(property = "stuNo",   column = "stu_no"),
-            @Result(property = "stuSex",  column = "stu_sex")
     })
     Student getOneFromSno(String stuNo);
 
@@ -62,7 +59,7 @@ public interface StudentDao {
      * 插入学生信息
      * @param student 学生对象
      */
-    @Insert("INSERT INTO tbl_student(stu_name,stu_pass,stu_no,stu_sex) VALUES(#{stuName}, #{stuPass}, #{stuNo}, #{stuSex})")
+    @Insert("INSERT INTO tbl_student(stu_name,stu_pass,stu_no) VALUES(#{stuName}, #{stuPass}, #{stuNo})")
     @Options(useGeneratedKeys = true, keyProperty = "stuId", keyColumn="stu_id")
     void insert(Student student);
 
@@ -70,7 +67,7 @@ public interface StudentDao {
      * 更新学生信息
      * @param student 学生
      */
-    @Update("UPDATE tbl_student SET stu_name=#{stuName},stu_pass=#{stuPass},stu_no=#{stuNo},stu_sex=#{stuSex} WHERE stu_id =#{stuId}")
+    @Update("UPDATE tbl_student SET stu_name=#{stuName},stu_pass=#{stuPass},stu_no=#{stuNo} WHERE stu_id =#{stuId}")
     void update(Student student);
 
     /**

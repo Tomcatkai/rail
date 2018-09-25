@@ -11,9 +11,6 @@ import com.zr.rail.utils.jwt.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
@@ -45,17 +42,20 @@ public class ScoreController {
 
     /**
      * 用户注册
-     * @param stuName 学生姓名
-     * @param stuNo 学生学号
-     * @param stuPass 学生密码
-     * @param stuSex 学生性别
+     * @param jsonObject 学生姓名
      * @return suc msg
      */
     @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public Map userRegister(@RequestParam(value = "stuName") String stuName,
-                           @RequestParam(value = "stuNo") String stuNo,
-                           @RequestParam(value = "stuPass") String stuPass,
-                           @RequestParam(value = "stuSex") Integer stuSex){
+    public Map userRegister(@RequestBody JSONObject jsonObject){
+        String stuName = jsonObject.getString("stuName");
+        String stuNo = jsonObject.getString("stuNo");
+        String stuPass = jsonObject.getString("stuPass");
+        if(stuName.isEmpty()){
+            return ResultUtils.error("学生姓名为空");
+        }
+        if(stuPass.isEmpty()){
+            return ResultUtils.error("学生密码为空");
+        }
         if(stuNo.isEmpty()){
             return ResultUtils.error(ResultMsg.STU_NO_BLANK.msg());
         }
@@ -63,21 +63,22 @@ public class ScoreController {
         student.setStuName(stuName);
         student.setStuNo(stuNo);
         student.setStuPass(stuPass);
-        student.setStuSex(stuSex);
         return scoreService.stuRegister(student);
     }
 
     /**
      * 用户登录方法
-     * @param stuNo 学号
-     * @param passWord 密码
+     * @param jsonObject json对象
      * @return 返回
      */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public Map login(@RequestParam(value = "stuNo") String stuNo,
-                     @RequestParam(value = "passWord") String passWord,
-                     HttpServletResponse response){
-        return scoreService.stuLogin(stuNo,passWord,response);
+    public Map login(@RequestBody JSONObject jsonObject){
+        String stuNo = jsonObject.getString("stuNo");
+        String passWord = jsonObject.getString("passWord");
+        if(stuNo.isEmpty()||passWord.isEmpty()){
+            return ResultUtils.error("学号或密码为空");
+        }
+        return scoreService.stuLogin(stuNo,passWord);
     }
 
     /**

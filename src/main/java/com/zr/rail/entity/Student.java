@@ -22,10 +22,6 @@ public class Student {
      * 学号
      */
     private String stuNo;
-    /**
-     * 学生性别
-     */
-    private Integer stuSex;
 
     public Long getStuId() {
         return stuId;
@@ -59,20 +55,11 @@ public class Student {
         this.stuNo = stuNo;
     }
 
-    public Integer getStuSex() {
-        return stuSex;
-    }
-
-    public void setStuSex(Integer stuSex) {
-        this.stuSex = stuSex;
-    }
-
-    public Student(Long stuId, String stuName, String stuPass, String stuNo, Integer stuSex) {
+    public Student(Long stuId, String stuName, String stuPass, String stuNo) {
         this.stuId = stuId;
         this.stuName = stuName;
         this.stuPass = stuPass;
         this.stuNo = stuNo;
-        this.stuSex = stuSex;
     }
     public Student(){}
 
