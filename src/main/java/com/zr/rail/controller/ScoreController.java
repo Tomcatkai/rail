@@ -88,15 +88,7 @@ public class ScoreController {
      */
     @RequestMapping(value = "/score",method = RequestMethod.POST)
     public Map getScore(@RequestBody JSONObject jsonObject){
-        if(jsonObject.get("token")==null){
-            return ResultUtils.error("token为空");
-        }
-        ArrayList list = (ArrayList) jsonObject.get("token");
-        HashMap hashMap = (HashMap) list.get(0);
-        if(hashMap==null){
-            return ResultUtils.error("token为空");
-        }
-        String token = (String) hashMap.get("token");
+        String token = jsonObject.getString("token");
         if(token.isEmpty()){
             return ResultUtils.error("token为空");
         }

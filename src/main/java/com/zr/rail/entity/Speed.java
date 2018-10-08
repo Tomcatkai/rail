@@ -13,11 +13,11 @@ public class Speed {
     /**
      * 实速
      */
-    private Integer speedReal;
+    private Double speedReal;
     /**
      * 观速
      */
-    private Integer speedView;
+    private Double speedView;
     /**
      * 本次观速成绩
      */
@@ -35,19 +35,19 @@ public class Speed {
         this.speedId = speedId;
     }
 
-    public Integer getSpeedReal() {
+    public Double getSpeedReal() {
         return speedReal;
     }
 
-    public void setSpeedReal(Integer speedReal) {
+    public void setSpeedReal(Double speedReal) {
         this.speedReal = speedReal;
     }
 
-    public Integer getSpeedView() {
+    public Double getSpeedView() {
         return speedView;
     }
 
-    public void setSpeedView(Integer speedView) {
+    public void setSpeedView(Double speedView) {
         this.speedView = speedView;
     }
 
@@ -67,7 +67,7 @@ public class Speed {
         this.speedScoreId = speedScoreId;
     }
 
-    public Speed(Long speedId, Integer speedReal, Integer speedView, Integer speedScore, Long speedScoreId) {
+    public Speed(Long speedId, Double speedReal, Double speedView, Integer speedScore, Long speedScoreId) {
         this.speedId = speedId;
         this.speedReal = speedReal;
         this.speedView = speedView;

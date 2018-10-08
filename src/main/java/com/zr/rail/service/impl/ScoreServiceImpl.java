@@ -18,8 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -153,35 +151,29 @@ public class ScoreServiceImpl implements ScoreService {
             //初始化分数
             int score = 0;
             LinkedHashMap map = (LinkedHashMap) obj;
-            Integer view;
-            Integer real;
+            BigDecimal view;
+            BigDecimal real;
             if("speed".equals(type)){
-                view = Integer.parseInt((String) map.get("viewSpeed"));
-                real = Integer.parseInt((String) map.get("realSpeed"));
+                view =  new BigDecimal(map.get("viewSpeed").toString());
+                real =  new BigDecimal(map.get("realSpeed").toString());
             }else if("distance".equals(type)){
-                view = Integer.parseInt((String) map.get("viewDistance"));
-                real = Integer.parseInt((String) map.get("realDistance"));
+                System.out.println(map.get("viewDistance").toString());
+                view = new BigDecimal(map.get("viewDistance").toString());
+                real = new BigDecimal(map.get("realDistance").toString());
             }else {
                 result.put(Constants.FLAG, Constants.FAILED);
                 result.put("msg",ResultMsg.PARAM_INSIDE_WRONG.msg());
                 return result;
             }
-///            //观测,实际空校验
-//            if(view==null||real==null){
-//                result.put(Constants.FLAG,Constants.FAILED);
-//                result.put("msg",ResultMsg.PARAM_IS_BLANK.msg());
-//                return result;
-//            }
             //实际0校验
-            if(real==0){
+            if(real.compareTo(new BigDecimal("0"))==0){
                 result.put(Constants.FLAG,Constants.FAILED);
                 result.put("msg",ResultMsg.PARAM_IS_INVALID.msg());
                 return result;
             }
             //观测实际差之绝对值
-            int abs = Math.abs(view-real);
-            BigDecimal absDecimal = new BigDecimal(abs);
-            BigDecimal realDecimal = new BigDecimal(real);
+            BigDecimal absDecimal = view.subtract(real).abs();
+            BigDecimal realDecimal = real;
             //计算差与实际之比(误差)
             BigDecimal percent = absDecimal.divide(realDecimal,2,BigDecimal.ROUND_HALF_DOWN);
             if(percent.compareTo(new BigDecimal("0.05")) < 0){
@@ -226,11 +218,11 @@ public class ScoreServiceImpl implements ScoreService {
         scoreDao.insert(score);
         for(Object distanceObj :distanceList){
             LinkedHashMap map = (LinkedHashMap) distanceObj;
-            Integer viewDistance = Integer.parseInt((String) map.get("viewDistance"));
-            Integer realDistance = Integer.parseInt((String) map.get("realDistance"));
+            BigDecimal viewDistance = new BigDecimal(map.get("viewDistance").toString());
+            BigDecimal realDistance = new BigDecimal(map.get("realDistance").toString());
             Distance distance = new Distance();
-            distance.setDistanceView(viewDistance);
-            distance.setDistanceReal(realDistance);
+            distance.setDistanceView(viewDistance.doubleValue());
+            distance.setDistanceReal(realDistance.doubleValue());
             int curIndex = distanceList.indexOf(distanceObj);
             distance.setDistanceScore((Integer) distanceScoreList.get(curIndex));
             distance.setDistanceScoreId(score.getScoreId());
@@ -238,11 +230,11 @@ public class ScoreServiceImpl implements ScoreService {
         }
         for(Object speedObj :speedList){
             LinkedHashMap map = (LinkedHashMap) speedObj;
-            Integer viewSpeed = Integer.parseInt((String) map.get("viewSpeed"));
-            Integer realSpeed = Integer.parseInt((String) map.get("realSpeed"));
+            BigDecimal viewSpeed = new BigDecimal(map.get("viewSpeed").toString());
+            BigDecimal realSpeed = new BigDecimal(map.get("realSpeed").toString());
             Speed speed = new Speed();
-            speed.setSpeedView(viewSpeed);
-            speed.setSpeedReal(realSpeed);
+            speed.setSpeedView(viewSpeed.doubleValue());
+            speed.setSpeedReal(realSpeed.doubleValue());
             int curIndex = speedList.indexOf(speedObj);
             speed.setSpeedScore((Integer) speedScoreList.get(curIndex));
             speed.setSpeedScoreId(score.getScoreId());

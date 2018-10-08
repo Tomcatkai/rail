@@ -8,8 +8,8 @@ import java.util.Map;
  */
 public class ResultUtils {
 
-    private static int SUCCESS = 0;
-    private static int ERROR = 1;
+    private static int SUCCESS = 1;
+    private static int ERROR = 0;
 
     private static String CODE = "code";
     private static String DATA = "data";

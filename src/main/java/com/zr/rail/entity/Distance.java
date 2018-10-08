@@ -13,11 +13,11 @@ public class Distance {
     /**
      * 实距
      */
-    private Integer distanceReal;
+    private Double distanceReal;
     /**
      * 观距
      */
-    private Integer distanceView;
+    private Double distanceView;
     /**
      * 本次观距成绩
      */
@@ -35,19 +35,19 @@ public class Distance {
         this.distanceId = distanceId;
     }
 
-    public Integer getDistanceReal() {
+    public Double getDistanceReal() {
         return distanceReal;
     }
 
-    public void setDistanceReal(Integer distanceReal) {
+    public void setDistanceReal(Double distanceReal) {
         this.distanceReal = distanceReal;
     }
 
-    public Integer getDistanceView() {
+    public Double getDistanceView() {
         return distanceView;
     }
 
-    public void setDistanceView(Integer distanceView) {
+    public void setDistanceView(Double distanceView) {
         this.distanceView = distanceView;
     }
 
@@ -67,7 +67,7 @@ public class Distance {
         this.distanceScoreId = distanceScoreId;
     }
 
-    public Distance(Long distanceId, Integer distanceReal, Integer distanceView, Integer distanceScore, Long distanceScoreId) {
+    public Distance(Long distanceId, Double distanceReal, Double distanceView, Integer distanceScore, Long distanceScoreId) {
         this.distanceId = distanceId;
         this.distanceReal = distanceReal;
         this.distanceView = distanceView;
